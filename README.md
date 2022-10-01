@@ -26,8 +26,15 @@ Although predictable 90 second cycles will not behave independently in practice,
 
 Furthermore, I add a penalty of 24 seconds to walk down Technology Square and 9 seconds to walk down Galileo Galilei because these routes are longer than the shortest possible walking route (which is to walk on Broadway until its intersection with Ames).  
 
+These results are only valid for the walk to work, not for the walk home.
+
 ### Results
 
 The route with the least combined average delay from additional walking time and waiting to cross intersections is to turn right on Technology Square, left on Main Street, then cross both Main Street and Vassar/Galileo Galilei at their intersection, then continue down the southern side of Main until reaching the southeastern corner of Main and Ames.
 
 But, this route is not guaranteed to be the fastest: although the shortest possible route is not the fastest on average, it is possible that on a very lucky day one would not need to wait any time to cross any of the intersections along it.
+
+Some routes are guaranteed to have more expected delay:
+- if you cross Binney/Galileo Gailiei on Broadway, you should never proceed to walk down Galileo Galilei toward Main St.
+- when approaching the northwest corner of Main and Vassar/Galileo Galilei and Main and Ames, you should always plan on crossing whichever direction becomes crossable first.  Planning to cross one direction or the other first is always slower.
+- planning to cross Ames at Broadway has a higher expected delay than turning right onto Ames and heading to the Main/Ames intersection.
