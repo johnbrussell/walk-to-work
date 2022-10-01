@@ -217,11 +217,13 @@ def fill_out_choice_results_dict(choice_id, choice_results_dict, decision_dict, 
     for tpe in ["min", "max", "avg"]:
         if tpe not in choice_results_dict:
             choice_results_dict[tpe] = dict()
+        if tpe not in eliminations_list:
+            eliminations_list[tpe] = dict()
         for choice in choices:
-            avg_min = sum([(choice_results_dict[tpe][possibility.next_node].min_wait + possibility.min_wait) *
-                           possibility.probability for possibility in choice.possibilities])
-            avg_max = sum([(choice_results_dict[tpe][possibility.next_node].max_wait + possibility.max_wait) *
-                           possibility.probability for possibility in choice.possibilities])
+            avg_min = min([(choice_results_dict[tpe][possibility.next_node].min_wait + possibility.min_wait)
+                           for possibility in choice.possibilities])
+            avg_max = max([(choice_results_dict[tpe][possibility.next_node].max_wait + possibility.max_wait)
+                           for possibility in choice.possibilities])
             avg_wait = sum([(choice_results_dict[tpe][possibility.next_node].avg_wait +
                              possibility.min_wait / 2.0 + possibility.max_wait / 2.0) *
                             possibility.probability for possibility in choice.possibilities])
@@ -246,15 +248,28 @@ def fill_out_choice_results_dict(choice_id, choice_results_dict, decision_dict, 
 
             choice_results_dict[tpe][f"{choice_id}: {choice.name}"] = new_result
 
-        if choice_id not in eliminations_list:
-            eliminations_list[choice_id] = []
+        if choice_id not in eliminations_list[tpe]:
+            eliminations_list[tpe][choice_id] = []
         new_result = choice_results_dict[tpe][choice_id]
         all_results = {key: result for key, result in choice_results_dict[tpe].items() if
                        key.startswith(f"{choice_id}:")}
         eliminated_results = [key for key, result in all_results.items() if (result.min_wait > new_result.max_wait or
                               (result.min_wait > new_result.min_wait and result.max_wait > new_result.max_wait and
-                               result.avg_wait > new_result.avg_wait)) and key not in eliminations_list[choice_id]]
-        eliminations_list[choice_id].extend(eliminated_results)
+                               result.avg_wait > new_result.avg_wait)) and key not in eliminations_list[tpe][choice_id]]
+        eliminations_list[tpe][choice_id].extend(eliminated_results)
+
+
+def prune_eliminations_list(eliminations_list, decision_dict):
+    for tpe, choice_dict in eliminations_list.items():
+        choice_ids = [str(d) for d in sorted([int(c) for c in choice_dict.keys() if c not in [START, END]],
+                                             reverse=True)]
+        for choice_id in choice_ids:
+            parents = []
+            for c_id, choices in decision_dict.items():
+                if any([[possibility.next_node == choice_id for possibility in c.possibilities] for c in choices]):
+                    parents.append(c_id)
+            if all([eliminations_list[tpe][parent] for parent in parents]):
+                eliminations_list[tpe][choice_id] = []
 
 
 def main():
@@ -284,9 +299,12 @@ def main():
             print(key, result)
 
     print("Eliminations:")
-    for choice_id, eliminations in eliminations_list.items():
-        if eliminations:
-            print(choice_id, eliminations)
+    prune_eliminations_list(eliminations_list, decision_dict)
+    for tpe, choice_dict in eliminations_list.items():
+        print(tpe)
+        for choice_id, eliminations in choice_dict.items():
+            if eliminations:
+                print(choice_id, eliminations)
 
 
 main()
