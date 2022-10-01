@@ -20,7 +20,7 @@ For each of these intersections, I deduct a commensurate amount of time to accou
 - To cross Ames on Main: 5 seconds
 - To cross Main on Ames: 5 seconds
 
-I further assume that these durations are equivalent to the amount of time it takes to cross these streets (note: this assumption is great for simplifying the problem, particularly at Main and Vassar/Gailieo Galilei, but it's also not entirely true, particularly at Main and Vassar/Galileo Galilei, where crossing either street is probably a 10 second affair (or maybe 7 to cross Main)).
+I further assume that these durations are equivalent to the amount of time it takes to cross these streets (note: this assumption is great for simplifying the problem, particularly at Main and Vassar/Gailieo Galilei, but it's also not entirely true, particularly at Main and Vassar/Galileo Galilei, where crossing either street is probably a 10 second affair (or maybe 7 to cross Main)).  This assumption is potentially somewhat more problematic than it seems on the surface: because this program measures only time spent waiting to cross and time spent walking down Technology Square and Galileo Galilei specifically, assuming a longer-than-true walking time across certain intersections ends up favoring those intersections by adding less delay than they actually cause.
 
 Although predictable 90 second cycles will not behave independently in practice, I make this assumption anyway to simplify the calculations in this analysis.
 
