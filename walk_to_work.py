@@ -51,10 +51,10 @@ DECISION_DICT = {
             Possibility("Wait to cross Galileo Galilei", "11", 0, 60, 2.0 / 3),
         ]),
         Choice("Cross diagonally to SE corner", [
-            Possibility("Cross diagonally: no wait to cross Main", "32", 0, 30, 1.0 / 3),
-            Possibility("Cross diagonally: no wait to cross Vassar", "33", 0, 30, 1.0 / 3),
-            Possibility("Cross diagonally: wait, cross Main first", "34", 30, 45, 1.0 / 6),
-            Possibility("Cross diagonally: wait, cross Vassar first", "35", 30, 45, 1.0 / 6),
+            Possibility("Cross diagonally: no wait to cross Main", "32", 5, 35, 1.0 / 3),
+            Possibility("Cross diagonally: no wait to cross Vassar", "33", 5, 35, 1.0 / 3),
+            Possibility("Cross diagonally: wait, cross Main first", "34", 35, 50, 1.0 / 6),
+            Possibility("Cross diagonally: wait, cross Vassar first", "35", 35, 50, 1.0 / 6),
         ])
     ],
     "6-7": [
@@ -67,17 +67,17 @@ DECISION_DICT = {
     ],
     "8": [
         Choice("Cross Vassar", [
-            Possibility("Wait to cross Vassar", "14", 0, 30, 1),
+            Possibility("Wait to cross Vassar", "14", 5, 35, 1),
         ]),
     ],
     "9": [
         Choice("Cross Vassar", [
-            Possibility("Wait to cross Vassar", "15", 30, 30, 1),
+            Possibility("Wait to cross Vassar", "15", 35, 35, 1),
         ]),
     ],
     "10": [
         Choice("Cross Main St.", [
-            Possibility("Wait to cross Main St.", "16", 0, 30, 1),
+            Possibility("Wait to cross Main St.", "16", 5, 35, 1),
         ]),
         Choice("Walk down Main St. to Main and Ames (NW corner)", [
             Possibility("Walk down Main St. to Main and Ames (NW corner)", "17", 0, 0, 1),
@@ -85,7 +85,7 @@ DECISION_DICT = {
     ],
     "11": [
         Choice("Cross Main St.", [
-            Possibility("Wait to cross Main St.", "18", 30, 30, 1),
+            Possibility("Wait to cross Main St.", "18", 35, 35, 1),
         ]),
         Choice("Walk down Main St. to Main and Ames (NW corner)", [
             Possibility("Walk down Main St. to Main and Ames (NW corner)", "19", 0, 0, 1),
